@@ -4,6 +4,9 @@
 #pragma once
 
 #include <util/common/gui/SimulationDialog.h>
+#include <util/common/plot/PlotStatic.h>
+
+const size_t max_wavefuncs = 6;
 
 // CWavePacketDlg dialog
 class CWavePacketDlg : public CSimulationDialog
@@ -31,4 +34,15 @@ protected:
 
 public:
     virtual void OnSimulation();
+    afx_msg void OnBnClickedButton1();
+    afx_msg void OnBnClickedButton2();
+    double m_lfBarrierWidth;
+    double m_lfBarrierHeight;
+    double m_lfModelingInterval;
+    double m_lfTimeDelta;
+    double m_lfDistanceDelta;
+    PlotStatic m_cWavePacketPlot;
+    PlotStatic m_cSpectrumPlot;
+    PlotStatic m_cWaveFunctionPlot;
+    int m_nOrbitalMomentum;
 };
