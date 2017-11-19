@@ -1,12 +1,12 @@
-
 // WavePacketDlg.h : header file
 //
 
 #pragma once
 
+#include <util/common/gui/SimulationDialog.h>
 
 // CWavePacketDlg dialog
-class CWavePacketDlg : public CDialogEx
+class CWavePacketDlg : public CSimulationDialog
 {
 // Construction
 public:
@@ -28,4 +28,7 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
+
+public:
+    virtual void OnSimulation();
 };

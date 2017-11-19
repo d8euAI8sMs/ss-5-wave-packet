@@ -17,17 +17,17 @@
 
 
 CWavePacketDlg::CWavePacketDlg(CWnd* pParent /*=NULL*/)
-	: CDialogEx(CWavePacketDlg::IDD, pParent)
+	: CSimulationDialog(CWavePacketDlg::IDD, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
 void CWavePacketDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CDialogEx::DoDataExchange(pDX);
+	CSimulationDialog::DoDataExchange(pDX);
 }
 
-BEGIN_MESSAGE_MAP(CWavePacketDlg, CDialogEx)
+BEGIN_MESSAGE_MAP(CWavePacketDlg, CSimulationDialog)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 END_MESSAGE_MAP()
@@ -37,7 +37,7 @@ END_MESSAGE_MAP()
 
 BOOL CWavePacketDlg::OnInitDialog()
 {
-	CDialogEx::OnInitDialog();
+	CSimulationDialog::OnInitDialog();
 
 	// Set the icon for this dialog.  The framework does this automatically
 	//  when the application's main window is not a dialog
@@ -74,7 +74,7 @@ void CWavePacketDlg::OnPaint()
 	}
 	else
 	{
-		CDialogEx::OnPaint();
+		CSimulationDialog::OnPaint();
 	}
 }
 
@@ -85,3 +85,7 @@ HCURSOR CWavePacketDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+void CWavePacketDlg::OnSimulation()
+{
+    CSimulationDialog::OnSimulation();
+}
