@@ -257,34 +257,34 @@
 
             Поэтому приходится строить такие граничные условия, которые бы имитировали открытое пространство. Такие условия называются открытыми, или свободными.
 
-            Пусть задана ограниченная некоторым радиусом $a$ потенциальная яма $U(r)$, т.е. $U(r \ge a) = 0$, причем в точке $b > a$ удовлетворяются граничные условия на бесконечности: $\Psi(\infty,t) = \Psi(b,t) = 0$. Построим функцию $f(r)$:
+            Пусть задана ограниченная некоторым радиусом $a$ потенциальная яма $U(x)$, т.е. $U(x \ge a) = 0$, причем в точке $b > a$ удовлетворяются граничные условия на бесконечности: $\Psi(\infty,\tau) = \Psi(b,\tau) = 0$. Построим функцию $f(x)$:
             %
             \begin{equation}
-                f(r) = \frac{1}{1 + i \gamma \sigma(r)} , \quad
+                f(x) = \frac{1}{1 + i \gamma \sigma(x)} , \quad
                 \gamma = \text{const} , \quad
-                \sigma(r) = \begin{cases}
-                    0         & r  <  a  \\
-                    (r - a)^2 & r \ge a .
+                \sigma(x) = \begin{cases}
+                    0         & x  <  a  \\
+                    (x - a)^2 & x \ge a .
                 \end{cases}
             \end{equation}
             %
             В дифференциальном уравнении произведем замену
             %
             \begin{equation}\label{eq:inf_conditions}
-                \pdv{r} \rightarrow f(r) \pdv{r} .
+                \pdv{x} \rightarrow f(x) \pdv{x} .
             \end{equation}
             %
-            Волновая функция будет поглощаться в слое $a < r < b$, а отражений от бесконечно высоких стенок $r = b$ ямы не будет.
+            Волновая функция будет поглощаться в слое $a < x < b$, а отражений от бесконечно высоких стенок $x = b$ ямы не будет.
 
-            Перепишем \autoref{eq:schrodinger_final} с учетом \autoref{eq:inf_conditions}:
+            Перепишем \autoref{eq:schrodinger_dimensionless} с учетом \autoref{eq:inf_conditions}:
             %
-            \begin{equation}\label{eq:schrodinger_final2}
-                \pdv{\psi(r,t)}{t}
-                    = \frac{i}{\hbar} \qty(
-                        \frac{\hbar^2}{2m} f(r) \pdv{r}(f(r)\pdv{\psi(r,t)}{r}) +
+            \begin{equation}\label{eq:schrodinger_free_space}
+                \pdv{\psi(x,\tau)}{\tau}
+                    = i \qty(
+                        f(x) \pdv{x}(f(x)\pdv{\psi(x,\tau)}{x}) +
                         \qty(
-                            \frac{\hbar^2}{2m} \frac{l (l + 1)}{r^2} - U(r)
-                        ) \psi(r,t)
+                            \frac{l (l + 1)}{x^2} - U(x)
+                        ) \psi(x,\tau)
                     ) .
             \end{equation}
 
