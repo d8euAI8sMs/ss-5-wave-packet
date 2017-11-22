@@ -607,4 +607,33 @@ void CWavePacketDlg::OnBnClickedButton2()
 void CWavePacketDlg::OnBnClickedButton3()
 {
     UpdateData(TRUE);
+
+    if (m_nWaveFunctionToDisplay >= energy_levels.size())
+    {
+        m_nWaveFunctionToDisplay = energy_levels.size();
+    }
+    wavefunc_plots[0].auto_world->clear();
+    if (m_nWaveFunctionToDisplay <= 0)
+    {
+        for (size_t i = 0; i < energy_levels.size(); ++i)
+        {
+            wavefunc_plots[i].view->visible = true;
+            wavefunc_plots[i].auto_world->adjust(*wavefunc_plots[i].data);
+        }
+    }
+    else
+    {
+        for (size_t i = 0; i < energy_levels.size(); ++i)
+        {
+            wavefunc_plots[i].view->visible = ((i + 1) == m_nWaveFunctionToDisplay);
+            if ((i + 1) == m_nWaveFunctionToDisplay)
+            {
+                wavefunc_plots[i].auto_world->adjust(*wavefunc_plots[i].data);
+            }
+        }
+    }
+    wavefunc_plots[0].auto_world->flush();
+    m_cWaveFunctionPlot.RedrawBuffer();
+    m_cWaveFunctionPlot.SwapBuffers();
+    m_cWaveFunctionPlot.RedrawWindow();
 }
