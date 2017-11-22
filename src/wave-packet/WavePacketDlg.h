@@ -49,4 +49,7 @@ public:
     double m_lfPacketMagnitude;
     double m_lfPacketDispersion;
     double m_lfPacketPosition;
+    int m_nSpectrumPoints;
+    int m_nWaveFunctionToDisplay;
+    afx_msg void OnBnClickedButton3();
 };

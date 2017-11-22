@@ -45,6 +45,8 @@ CWavePacketDlg::CWavePacketDlg(CWnd* pParent /*=NULL*/)
     , m_lfPacketMagnitude(1)
     , m_lfPacketDispersion(0.1)
     , m_lfPacketPosition(0.5)
+    , m_nSpectrumPoints(1000)
+    , m_nWaveFunctionToDisplay(0)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -65,6 +67,8 @@ void CWavePacketDlg::DoDataExchange(CDataExchange* pDX)
     DDX_Text(pDX, IDC_EDIT8, m_lfPacketMagnitude);
     DDX_Text(pDX, IDC_EDIT9, m_lfPacketDispersion);
     DDX_Text(pDX, IDC_EDIT10, m_lfPacketPosition);
+    DDX_Text(pDX, IDC_EDIT11, m_nSpectrumPoints);
+    DDX_Text(pDX, IDC_EDIT12, m_nWaveFunctionToDisplay);
 }
 
 BEGIN_MESSAGE_MAP(CWavePacketDlg, CSimulationDialog)
@@ -72,6 +76,7 @@ BEGIN_MESSAGE_MAP(CWavePacketDlg, CSimulationDialog)
 	ON_WM_QUERYDRAGICON()
     ON_BN_CLICKED(IDC_BUTTON1, &CWavePacketDlg::OnBnClickedButton1)
     ON_BN_CLICKED(IDC_BUTTON2, &CWavePacketDlg::OnBnClickedButton2)
+    ON_BN_CLICKED(IDC_BUTTON3, &CWavePacketDlg::OnBnClickedButton3)
 END_MESSAGE_MAP()
 
 
@@ -271,4 +276,10 @@ void CWavePacketDlg::OnBnClickedButton1()
 void CWavePacketDlg::OnBnClickedButton2()
 {
     StopSimulationThread();
+}
+
+
+void CWavePacketDlg::OnBnClickedButton3()
+{
+    UpdateData(TRUE);
 }
