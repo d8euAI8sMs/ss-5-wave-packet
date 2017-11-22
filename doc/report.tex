@@ -288,4 +288,57 @@
                     ) .
             \end{equation}
 
+        %
+        %
+        %
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %                        SUBSECTION                               %
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %
+        %
+        %
+
+        \subsection{ƒискретна€ модель}
+
+            «ададим сетку узлов, на которой произведем приведение уравнений к дискретному виду. ¬ыберем $N$ узлов временн\'{о}й сетки, $0 = \tau_0 < \dots < \tau_{N-1}$, $\tau_{i+1} - \tau_i = \delta \tau$, и $M$ узлов пространственной сетки, $0 + \varepsilon = x_0 < \dots < x_M = b$. Ќа этой сетке дискретизуем потенциал $U_k = U(x_k)$ и волновые функции $\psi^i_k = \psi(x_k,\tau_i)$. ѕроизводные представим в виде
+            %
+            \begin{equation}\begin{gathered}
+                \begin{aligned}
+                    \eval{\pdv{\psi(x,\tau)}{x}}_{x=x_k} & \approx
+                        \delta_x \psi_k = \frac{\psi_{k+1} - \psi_{k-1}}{x_{k+1} - x_{k-1}} \\
+                    \eval{\pdv[2]{\psi(x,\tau)}{x}}_{x=x_k} & \approx
+                        \delta^2_x \psi_k = \frac{2}{x_{k+1} - x_{k-1}} \qty(
+                            \frac{\psi_{k+1} - \psi_{k}}{x_{k+1} - x_{k}} -
+                            \frac{\psi_{k} - \psi_{k-1}}{x_{k} - x_{k-1}}
+                        ) \\
+                    \eval{f(x) \pdv{x}(f(x)\pdv{\psi(x,\tau)}{x})}_{x=x_k} & \approx
+                        \delta^2_{f,x} \psi_k =
+                \end{aligned} \\
+                \frac{2 f(x_k)}{x_{k+1} - x_{k-1}} \qty(
+                    f(x_{k+1}) \frac{\psi_{k+1} - \psi_{k}}{x_{k+1} - x_{k}} -
+                    f(x_{k-1}) \frac{\psi_{k} - \psi_{k-1}}{x_{k} - x_{k-1}}
+                )
+            \end{gathered}\end{equation}
+
+            ѕроинтегрируем \autoref{eq:schrodinger_free_space} на интервале $\qty[\tau_{i-1}, \tau_i]$:
+            %
+            \begin{multline}
+                \psi^i(x) = \psi^{i-1}(x) + \\ i \int\limits_{t_{i-1}}^{t_i} \qty(
+                    f(x) \pdv{x}(f(x)\pdv{\psi(x,\tau)}{x}) +
+                    \qty(
+                        \frac{l (l + 1)}{x^2} - U(x)
+                    ) \psi(x,\tau)
+                ) \dd{x} .
+            \end{multline}
+            %
+            ƒл€ интегрировани€ воспользуемс€ формулой трапеций:
+            %
+            \begin{equation}
+                \psi^i_k = \psi^{i-1}_k + i \frac{\delta\tau}{2} \qty(
+                    \delta^2_{f,x} \qty(\psi^i_k + \psi^{i-1}_k) +
+                    \qty(\frac{l(l+1)}{x^2_k} - U_k) \qty(\psi^i_k + \psi^{i-1}_k)
+                ) .
+            \end{equation}
+            %
+
 \end{document}
