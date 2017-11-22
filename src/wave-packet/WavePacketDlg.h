@@ -45,4 +45,8 @@ public:
     PlotStatic m_cSpectrumPlot;
     PlotStatic m_cWaveFunctionPlot;
     int m_nOrbitalMomentum;
+    double m_lfGamma;
+    double m_lfPacketMagnitude;
+    double m_lfPacketDispersion;
+    double m_lfPacketPosition;
 };

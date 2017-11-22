@@ -41,6 +41,10 @@ CWavePacketDlg::CWavePacketDlg(CWnd* pParent /*=NULL*/)
     , m_lfTimeDelta(0.001)
     , m_lfDistanceDelta(0.001)
     , m_nOrbitalMomentum(0)
+    , m_lfGamma(1)
+    , m_lfPacketMagnitude(1)
+    , m_lfPacketDispersion(0.1)
+    , m_lfPacketPosition(0.5)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -57,6 +61,10 @@ void CWavePacketDlg::DoDataExchange(CDataExchange* pDX)
     DDX_Control(pDX, IDC_PLOT2, m_cSpectrumPlot);
     DDX_Control(pDX, IDC_PLOT3, m_cWaveFunctionPlot);
     DDX_Text(pDX, IDC_EDIT6, m_nOrbitalMomentum);
+    DDX_Text(pDX, IDC_EDIT7, m_lfGamma);
+    DDX_Text(pDX, IDC_EDIT8, m_lfPacketMagnitude);
+    DDX_Text(pDX, IDC_EDIT9, m_lfPacketDispersion);
+    DDX_Text(pDX, IDC_EDIT10, m_lfPacketPosition);
 }
 
 BEGIN_MESSAGE_MAP(CWavePacketDlg, CSimulationDialog)
