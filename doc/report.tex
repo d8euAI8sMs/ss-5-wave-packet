@@ -333,12 +333,49 @@
             %
             ƒл€ интегрировани€ воспользуемс€ формулой трапеций:
             %
-            \begin{equation}
+            \begin{equation}\label{eq:discrete_schrodinger}
                 \psi^i_k = \psi^{i-1}_k + i \frac{\delta\tau}{2} \qty(
                     \delta^2_{f,x} \qty(\psi^i_k + \psi^{i-1}_k) +
                     \qty(\frac{l(l+1)}{x^2_k} - U_k) \qty(\psi^i_k + \psi^{i-1}_k)
                 ) .
             \end{equation}
+            %
+
+        %
+        %
+        %
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %                        SUBSECTION                               %
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %
+        %
+        %
+
+        \subsection{ћетод сеточной прогонки}
+
+            ћожно показать, что \autoref{eq:discrete_schrodinger} может быть представлено в виде
+            %
+            \begin{equation}
+                A_k \psi_{k-1}^i + B_k \psi_{k+1}^i + C_k \psi_k^i = D_k ,
+            \end{equation}
+            %
+            где $A_k$, $B_k$, $C_k$, $D_k$ -- некоторые не завис€щие от $\psi^i$ коэффициенты, $D_k$ зависит от $\psi^{i-1}$. ƒанна€ система уравнений относительно $\psi_k^i$ образует трехдиагональную матрицу.
+
+            ћожно также показать, что при граничных услови€х, заданных в виде $\psi_0 = \mu_0 \psi_1 + \nu_0$, $\psi_M = \mu_M \psi_1 + \nu_M$, а также при предположении $\psi_{k-1} = \alpha_k \psi_k + \beta$ дл€ решени€ задачи можно применить метод прогонки. Ќа первом этапе метода рассчитываютс€ все $\alpha_k$ и $\beta_k$:
+            %
+            \begin{equation}\begin{aligned}
+                \alpha_1     &= \mu_0 , \quad
+                \beta_1       = \nu_0 \\
+                \alpha_{k+1} &= - \frac{B_k}{C_k + A_k \alpha_k} \\
+                \beta_{k+1}  &= \frac{D_k - A_k \beta_k}{C_k + A_k \alpha_k} ,
+            \end{aligned}\end{equation}
+            %
+            на втором -- в все $\psi_k^i$ в обратном пор€дке:
+            %
+            \begin{equation}\begin{aligned}
+                \psi_M^i     &= \frac{\mu_M \beta_M + \nu_M}{1 - \mu_M \alpha_M} \\
+                \psi_{k-1}^i &= \alpha_k \psi_k^i + \beta_k .
+            \end{aligned}\end{equation}
             %
 
 \end{document}
