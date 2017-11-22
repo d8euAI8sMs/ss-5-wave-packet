@@ -202,11 +202,27 @@ BOOL CWavePacketDlg::OnInitDialog()
         )
     );
 
+    custom_drawable::ptr_t energy_level_strobes = custom_drawable::create
+    (
+        [&] (CDC & dc, const viewport & vp)
+        {
+            auto pen = palette::pen(0xffffff, 3);
+            dc.SelectObject(pen.get());
+            for (size_t i = 0; i < energy_levels.size(); ++i)
+            {
+                dc.MoveTo(vp.world_to_screen().x(energy_levels[i]), vp.screen.ymin);
+                dc.LineTo(vp.world_to_screen().x(energy_levels[i]), vp.screen.ymin + 15);
+            }
+            dc.MoveTo(vp.world_to_screen().x(m_lfBarrierHeight), vp.screen.ymax);
+            dc.LineTo(vp.world_to_screen().x(m_lfBarrierHeight), vp.screen.ymax - 15);
+        }
+    );
+
     m_cSpectrumPlot.plot_layer.with(
         viewporter::create(
             tick_drawable::create(
                 layer_drawable::create(std::vector < drawable::ptr_t > ({
-                    spectrum_plot.view
+                    spectrum_plot.view, energy_level_strobes
                 })),
                 const_n_tick_factory<axe::x>::create(
                     make_simple_tick_formatter(2, 5),
