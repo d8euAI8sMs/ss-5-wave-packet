@@ -162,11 +162,24 @@ BOOL CWavePacketDlg::OnInitDialog()
     m_cSpectrumPlot.triple_buffered     = true;
     m_cWaveFunctionPlot.triple_buffered = true;
 
+    custom_drawable::ptr_t barrier_strobes = custom_drawable::create
+    (
+        [&] (CDC & dc, const viewport & vp)
+        {
+            auto pen = palette::pen(0xffffff, 3);
+            dc.SelectObject(pen.get());
+            dc.MoveTo(vp.world_to_screen().x(m_lfBarrierWidth), vp.screen.ymax);
+            dc.LineTo(vp.world_to_screen().x(m_lfBarrierWidth), vp.screen.ymax - 15);
+            dc.MoveTo(vp.world_to_screen().x((m_lfBarrierWidth + m_lfModelingInterval) / 2), vp.screen.ymax);
+            dc.LineTo(vp.world_to_screen().x((m_lfBarrierWidth + m_lfModelingInterval) / 2), vp.screen.ymax - 15);
+        }
+    );
+
     m_cWavePacketPlot.plot_layer.with(
         viewporter::create(
             tick_drawable::create(
                 layer_drawable::create(std::vector < drawable::ptr_t > ({
-                    wave_packet_plot.view
+                    wave_packet_plot.view, barrier_strobes
                 })),
                 const_n_tick_factory<axe::x>::create(
                     make_simple_tick_formatter(2, 5),
@@ -208,6 +221,7 @@ BOOL CWavePacketDlg::OnInitDialog()
         )
     );
 
+    wavefunc_layers.push_back(barrier_strobes);
     m_cWaveFunctionPlot.plot_layer.with(
         viewporter::create(
             tick_drawable::create(
