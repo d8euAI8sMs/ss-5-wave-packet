@@ -111,7 +111,11 @@ BOOL CWavePacketDlg::OnInitDialog()
             create < points_t > (),
             [&] (const points_t &, const points_t::const_iterator & it, size_t j)
             {
-                return point < double > { j * m_lfDistanceDelta, norm(*it) };
+                return point < double >
+                {
+                    j * m_lfDistanceDelta,
+                    (j == 0) ? 0 : norm(*it) / m_lfDistanceDelta / j
+                };
             }
         ))
         .with_auto_viewport(wave_packet_avp);
@@ -121,9 +125,13 @@ BOOL CWavePacketDlg::OnInitDialog()
         .with_view_line_pen(plot::palette::pen(RGB(255, 255, 255), 2))
         .with_data(make_container_mapping_iterable < point < double > > (
             create < points_t > (),
-            [&] (const points_t &, const points_t::const_iterator & it, size_t j)
+            [&] (const points_t & c, const points_t::const_iterator & it, size_t j)
             {
-                return point < double > { (double) j / m_lfTimeDelta, norm(*it) };
+                return point < double >
+                {
+                    (double) j / c.size() / m_lfTimeDelta / 2,
+                    norm(*it)
+                };
             }
         ))
         .with_auto_viewport(wave_packet_avp);
@@ -139,7 +147,7 @@ BOOL CWavePacketDlg::OnInitDialog()
                 create < points_t > (),
                 [&] (const points_t &, const points_t::const_iterator & it, size_t j)
                 {
-                    return point < double > { j * m_lfDistanceDelta, norm(*it) };
+                    return point < double > { j * m_lfDistanceDelta, it->re };
                 }
             ))
             .with_auto_viewport(wavefunc_avp);
