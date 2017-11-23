@@ -10,7 +10,7 @@ install:
   - git submodule update --init --recursive
 
 build:
-  project: src\eigensystem\eigensystem.sln
+  project: src\wave-packet\wave-packet.sln
 
 artifacts:
-  - path: 'src\eigensystem\%CONFIGURATION%\eigensystem.exe'
+  - path: 'src\wave-packet\%CONFIGURATION%\wave-packet.exe'
